@@ -1,0 +1,16 @@
+
+<h2><%= @user.firstname %>'s Data</h2>
+
+<br>
+ <%= render 'shared/date_filter' %>
+<br>
+ <%= render 'shared/analyze_location' %>
+<br>
+ <%= render 'shared/analyze_physiology' %>
+<br>
+ <%= render 'shared/analyze_air_quality' %>
+<br>
+  
+
+<br>
+<%= link_to "Back", :back, :class => :button %>

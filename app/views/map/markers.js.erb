@@ -1,0 +1,6 @@
+Gmaps.location_map.destroy_polylines();
+markers = <%= raw( @sample.to_gmaps4rails )%>
+Gmaps.location_map.replaceMarkers(markers) 
+Gmaps.location_map.replacePolylines(<%=raw(@polyline)%>)
+
+

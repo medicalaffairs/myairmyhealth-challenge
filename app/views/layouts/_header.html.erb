@@ -1,0 +1,15 @@
+<div id="user_bar">
+  <%= link_to "Home", root_path %> |
+  <% if user_signed_in? %>
+  <%= link_to "Analyze", analyze_path %> |
+  <%= link_to "Profile", user_profile_path %> |
+  <% end %>
+ <!-- <%= link_to "Help", help_path %> | -->
+
+  <% if user_signed_in? %>
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+  <%= link_to "Sign in", new_user_session_path, :id=>"signinlink" %>
+  <% end %>
+  &nbsp; &nbsp;
+</div>

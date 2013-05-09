@@ -1,0 +1,16 @@
+
+	<h2> Respiratory Flow Meter </h2>
+	<br>
+	
+	<ol>
+	<li> Open the application on your phone and open the configuration options.
+	</li>
+	<li>In the text box </b>Server URL</b>, enter the following text and press <b>Save</b>:
+	<pre>https://<%= ::Rails.application.config.action_mailer.default_url_options[:host] %>/respflowdata/<%= @token %></pre>
+	</li>
+	<br>
+	<br>
+ 	<%= link_to "Authorize", respiratory_callback_path( { :token => @token} ), :method => :post, :class => :button %>
+ 
+	<%= link_to "Back", :back %>
+ 

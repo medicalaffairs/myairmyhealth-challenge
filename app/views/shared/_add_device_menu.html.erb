@@ -1,0 +1,13 @@
+<% if Device::remaining_options(@user).any? %>
+
+  <h4>Add a new device</h4>
+  
+  <div id="add_device_menu">
+	<% devices_array = Device::remaining_options(@user).map { |d| [d, d] } %>
+  <%= form_tag(:controller => :devices, :action => :create) do %>
+    <%= select_tag :devicename , options_for_select(devices_array) %>
+	  <%= submit_tag "Connect!", :class => :button %>	
+	<% end %>
+  </div>
+
+<% end %>

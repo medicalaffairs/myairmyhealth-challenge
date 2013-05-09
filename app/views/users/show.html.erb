@@ -1,0 +1,31 @@
+<div class="row-fluid">
+  <div class="span12">  
+    <div class="span2">
+      <%= gravatar_for @user %>
+    </div>
+    <div class="span6">
+      <h1><%= @user.firstname+' '+@user.lastname %><h1>
+    </div>
+    <div class="span4">
+      <table>
+        <tr>
+          <td class ="sidebar round">
+          <strong>Name</strong> <%= @user.firstname+' '+@user.lastname %><br/>
+          <strong>E-mail</strong> <%= @user.email %> <br/>
+          <%= link_to "Click to Edit Profile", edit_user_registration_path %> 
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="row-fluid">
+  <div class="span12">
+    <br>
+      <%= render "shared/show_registered_devices" %>
+    <br>
+      <%= render "shared/add_device_menu" %>
+    </div>
+</div>

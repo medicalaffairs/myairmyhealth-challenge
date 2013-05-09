@@ -1,0 +1,42 @@
+<% content_for :scripts do %>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+   mydatepicker=$('#reportrange span').daterangepicker(
+      {
+        ranges: {
+            'Today': ['today', 'today'],
+            'Yesterday': ['yesterday', 'yesterday'],
+            'Last 7 Days': [Date.today().add({ days: -6 }), 'today'],
+            'Last 30 Days': [Date.today().add({ days: -29 }), 'today'],
+            'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
+            'Last Month': [Date.today().moveToFirstDayOfMonth().add({ months: -1 }), Date.today().moveToFirstDayOfMonth().add({ days: -1 })]
+        },
+        startDate: Date.today().add({days: -7}),
+        endDate: Date.today()
+      },
+      function(start, end) {
+        $('#reportrange span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+        mydatepicker.startDate = start
+        mydatepicker.endDate = end
+        update_map();
+        update_physiology();
+        update_air_quality();
+      }
+    );
+    mydatepicker.startDate=Date.today().add({days: -7});
+    mydatepicker.endDate=Date.today();
+    $('#reportrange span').html(mydatepicker.startDate.toString('MMMM d, yyyy') + ' - ' + mydatepicker.endDate.toString('MMMM d, yyyy')); 
+  });
+</script>
+
+<% end %>
+ 
+ <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+    <i class="icon-calendar icon-large"></i>
+    <span></span> 
+</div>
+
+
+
+

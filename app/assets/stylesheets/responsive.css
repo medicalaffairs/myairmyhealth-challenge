@@ -1,0 +1,127 @@
+/*!
+ * Bootstrap Responsive v2.2.1
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.visible-phone {
+  display: none !important;
+}
+
+.visible-tablet {
+  display: none !important;
+}
+
+.hidden-desktop {
+  display: none !important;
+}
+
+.visible-desktop {
+  display: inherit !important;
+}
+
+
+@media (max-width: 767px) {
+    body {
+        background-color: #fff !important;
+    }
+    
+    .container {
+        width: auto;
+    }
+
+    #p-header-nav-site,
+    #p-footer{ 
+        display: none;
+    }
+    
+    #p-body,
+    #p-header{
+        width: 100% !important;
+    }
+
+    #p-body-innerwrapper, 
+    #p-header,
+    #p-body-wrapper,
+    #p-body-content,
+    #p-body-bottomwrapper{
+        background-color: #fff !important;
+        background-image: none !important;
+        width: auto !important;
+    }
+    
+    #p-header-wrapper{
+        width: auto !important;
+    }
+    
+    #p-header{
+        padding-bottom: 0 !important;
+        min-width: 0 !important;
+    }
+
+    #page_heading {
+        float: left;
+        width: 100%;
+    }
+    
+    #user_bar {
+        float: left;
+        text-align: left;
+    }
+    
+    #search_term{
+        display: inline;
+    } 
+
+}
+
+@media (max-width: 480px) {
+    .col1,
+    .col2{
+        width: 100%;
+    }
+    
+    .pagination .spacer {
+        width: 35px !important;
+    }            
+    
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }  
+}

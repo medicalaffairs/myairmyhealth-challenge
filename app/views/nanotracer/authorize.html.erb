@@ -1,0 +1,21 @@
+
+	<h2> Ultrafine Particle Sensing: Nanotracer </h2>
+	<br>
+	
+	<ol>
+	<li> Find the Nanotracer <b>sensor</b> serial number printed on the back of your device. 
+		The blue arrow in this image points to the sensor serial number:
+    <br><%= image_tag("nanotracer/nanotracer_sensor_serial.png", :size => "420x100") %>
+	</li>
+	<li>In the text box, enter your Nanotracer's <b>sensor</b> 
+		serial number printed on the back of your device:
+    <%= form_tag( nanoreporter_callback_path , :method=>"post") do %>
+ 	  <%= text_field_tag(:serial_number) %>
+    <%= submit_tag("Authorize", :class=>:button) %>
+		<% end %>
+  </li>
+	<br>
+	<br>
+ 
+	<%= link_to "Back", :back %>
+ 

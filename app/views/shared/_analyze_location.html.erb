@@ -1,0 +1,77 @@
+<% content_for :scripts do %>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('#location_devices_select').multiselect({
+      onChange: function(element, checked) {
+       update_map();
+      },
+    });
+    
+    update_map = function() {
+          var array_of_checked_values = 
+          $("#location_devices_select").multiselect().find('option').map(function(){
+             var a = {}; 
+             a['device_id'] = this.value;
+             a['selected']  = this.selected;
+             return a;   
+          }).get();
+   
+          var time_values = {};
+          time_values['start_date']= (mydatepicker.startDate.valueOf()/1000).toString();
+          time_values['end_date'] = new Date(mydatepicker.endDate.getTime());
+          time_values['end_date'] = (time_values['end_date'].add({days:1}).valueOf()/1000).toString();
+
+          $.ajax({
+            url: '<%= url_for(:controller => "map", :action => "markers") %>',
+            dataType: 'script',
+            data: {'location_menu_options': JSON.stringify(array_of_checked_values),
+                  'time_menu_options': JSON.stringify(time_values) },
+            type: 'post'
+          });
+   };
+ 
+  });
+</script>
+
+<script type="text/javascript">
+$('#location_devices_selection').ready( function() {
+  $('option', $('#location_devices_select')).each(function(element) {
+    $('#location_devices_select').multiselect('select', $(this).val());
+  });
+  update_map();
+})
+</script>
+<% end %>
+
+<div class="row-fluid">
+  <div class="span2">
+    <span ><h4>Location</h4></span>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span2">
+    <div id="location_devices_selection">
+      <% unless Device.get_devices(:location, @user).empty? %>
+        <%= select_tag("location_devices_select",  
+            options_for_select(
+                              Device.get_devices(:location, @user).map {|u| [u.devicename, u.id]},
+                            nil ), 
+            {:class => "multiselect", :multiple => "multiple"}) 
+       %>
+       <% end %>
+    </div>
+  </div>
+</div>
+
+<%= gmaps({
+  :map_options => { :container_id => "location_map_container", :id => "location_map",  
+    detect_location: true, center_on_user: true },  
+  "markers"    => { "data" => [], :options => { do_clustering: true} } ,
+  "polylines"    => { "data" => [] , "options" => { "strokeColor" => "#000" } }
+  })
+%>
+
+
+

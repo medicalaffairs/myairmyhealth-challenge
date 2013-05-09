@@ -1,0 +1,85 @@
+<% content_for :scripts do %>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $('#physiology_devices_select').multiselect({
+      onChange: function(element, checked) {
+       update_physiology();
+      },
+    });
+    
+    Highcharts.setOptions({    // This is for all plots, change Date axis to local timezone
+                global : {
+                    useUTC : false
+                }
+            });
+    update_physiology = function() {
+          console.log( "update_physiology" )
+          var array_of_checked_values = 
+          $("#physiology_devices_select").multiselect().find('option').map(function(){
+             var a = {}; 
+             var device_measure = this.value.split(" ");
+             a['device_id'] = device_measure[0];
+             device_measure.shift();
+             a['measure_type'] = device_measure.join(" ");
+             a['selected']  = this.selected;
+             console.log( a )
+             return a;   
+          }).get();
+   
+          var time_values = {};
+          time_values['start_date']= (mydatepicker.startDate.valueOf()/1000).toString();
+          time_values['end_date'] = new Date(mydatepicker.endDate.getTime());
+          time_values['end_date'] = (time_values['end_date'].add({days:1}).valueOf()/1000).toString();
+
+          $.ajax({
+            url: '<%= url_for(:controller => "physiology", :action => "data") %>',
+            dataType: 'script',
+            data: {'physiology_menu_options': JSON.stringify(array_of_checked_values),
+                  'time_menu_options': JSON.stringify(time_values) },
+            type: 'post'
+          });
+   };
+ 
+  });
+</script>
+
+
+<script type="text/javascript">
+$('#physiology_devices_selection').ready( function() {
+  $('option', $('#physiology_devices_select')).each(function(element) {
+    $('#physiology_devices_select').multiselect('select', $(this).val());
+  });
+  update_physiology();
+})
+</script>
+
+<% end %>
+
+<div class="row-fluid">
+  <div class="span2">
+    <span ><h4>Physiology</h4></span>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span2">
+    <div id="physiology_devices_selection">
+      <% unless Device.get_devices(:physiology, @user).empty? %>
+        <% @menu_options = Device.get_devices(:physiology, @user).map { |u|
+            group = [u.devicename, u.id]
+            measures = Device.find(u.id).get_physiology_measures.map { |v| [v, u.id.to_s+" "+v]}
+            [u.devicename, measures]
+          }
+        %>
+        <%= select_tag("physiology_devices_select",  
+            grouped_options_for_select(@menu_options), 
+            {:class => "multiselect", :multiple => "multiple"}) 
+        %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= high_chart("physiology_chart", @chart) %>

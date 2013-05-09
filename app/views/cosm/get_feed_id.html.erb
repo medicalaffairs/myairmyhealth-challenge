@@ -1,0 +1,18 @@
+
+	<h2> Add a new Cosm feed </h2>
+	<br>
+	
+	<ol>
+	<li>Find the feed ID number in Cosm.
+	</li>
+	<li>Enter the feed ID in the text box below:
+    <%= form_tag( cosm_authorize_url , :method=>"post") do %>
+ 	  <%= text_field_tag(:feed_id) %>
+    <%= submit_tag("Authorize", :class=>:button) %>
+		<% end %>
+  </li>
+	<br>
+	<br>
+ 
+	<%= link_to "Back", :back %>
+ 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title><%= title %></title>
+	<%= csrf_meta_tag %>
+  <%= render 'layouts/stylesheets' %>
+  <!-- Philips Look and Feel -->
+  <%= javascript_include_tag "https://www.crsc.philips.com/crsc/scripts/lib_global.js" %>
+  <%= javascript_include_tag "https://www.crsc.philips.com/crsc/locales/locale_us_en" %>
+  </head>
+  <body class="p-internet">
+    <%= javascript_include_tag "application" %>
+    <div class="container-fluid">
+      <%= render 'layouts/header' %>
+      <br/>
+      <br/>
+      <div id="main_content" class="container-fluid">
+        <section class="round">
+          <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "flash #{key}") %>
+            <% end %>
+          <!--<p class="notice"><%= notice %></p>-->
+          <!--<p class="alert"><%= alert %></p>-->
+        </section>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer' %>
+    </div>
+   <!-- Philips Look and Feel -->
+    <script type="text/javascript" language="javascript">
+      _page.writeFooter();
+      // Manipulate the Locale Selector entries
+      // - Global and others entry are currently mandatoy
+      _page.locales = {}; // reset locale list
+      _page.locales["global"] = "https://www.philips.com/global"; // mandatory
+      //        // - Add more locale entries below
+      //        // _page.locales["us_en"] = "https://www.usa.philips.com/index.page";
+    </script>
+    <%= javascript_include_tag "https://www.crsc.philips.com/crsc/scripts/s_code_philipsglobal.js" %>
+    <!-- javascript_include_tag "https://www.philips.com/ext_elems/opinionbar/philips_p11026/overlay.js" -->
+    <%= debug(params) if Rails.env.development? %>
+  </body>
+ </html>

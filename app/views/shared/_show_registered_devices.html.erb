@@ -1,0 +1,25 @@
+<div id="registered_devices">
+  
+  <h4><%= @user.firstname + "'s registered devices" %></h4>
+  
+  <% mydevices = @user.devices %> 
+  <% unless mydevices.empty? then %>
+    <ol>
+    <% mydevices.each do |device| %>
+      <li><b><%= device.devicename %></b>
+        &nbsp 
+          <% if device.is_authorized == 0 %>
+            <i>Authorization not completed</i> &nbsp;
+          <% end %>
+        <%=  link_to "Details", device.becomes(Device) %> 
+        &nbsp;
+        <%= link_to "[Delete]", device.becomes(Device),  {:method => :delete, :confirm => "Are you sure you want to disconnect this device?"} 
+        %>
+        </li>
+      <% end %>
+    </ol>
+  <% else %>  
+    <b> No devices registered </b>
+  <% end %>
+  
+ </div>

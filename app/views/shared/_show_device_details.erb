@@ -1,0 +1,34 @@
+<div id="registered_devices">
+  
+  <h4><%= @device.user.firstname%>'s <%= @device.devicename%></h4>
+  
+  <ol>
+    <% device_info = @device.info %>
+    <% unless device_info.nil? %>
+      <% device_info.map do | k,v | %>
+        <% if v.instance_of?(Hash) %>
+           <li><%= k %> 
+           <ol>
+            <% v.map do |k2,v2| %>
+              <li><%= k2 %> : <%= v2 %></li>        
+            <% end %>
+          </ol>
+          </li>
+        <% else %>
+          <li><%= k %> : <%= v %></li>
+        <% end %>
+      <% end %> 
+    <% end %>
+  </ol>
+
+  <% if @device.is_location_device? then %>
+    <%= gmaps({
+      :map_options => { detect_location: true, center_on_user: true },
+      "markers"    => { "data" => @location_json, :options => { do_clustering: true, :list_container => "markers_list"} } ,
+      "polylines"    => { "data" => @polyline_json , "options" => { "strokeColor" => "#000" } }
+     })  
+    %>
+    <h4>Last <%= @last_n %> locations</h4>
+    <ul id="markers_list">  </ul>  
+    <% end %>
+ </div>

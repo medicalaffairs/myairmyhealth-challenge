@@ -1,0 +1,16 @@
+<h1>Device Details</h1>
+
+<br>
+
+<%= render "shared/show_device_details" %>
+
+  
+  <% if @device.instance_of?(DeviceNanotracer) then %>
+  	<h4>Upload New Data</h4>
+    <%= render "shared/upload_nanotracer_data" %>
+	<br>
+  <% end %>
+
+<br>
+<%= link_to "Back", :back, :class => :button %>
+<%= link_to "Delete this device", @device.becomes(Device),  {  :controller => "devices" , :method => :delete, :confirm => "Are you sure you want to disconnect this device?"}   %>

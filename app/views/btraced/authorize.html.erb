@@ -1,0 +1,40 @@
+
+	<h2> GPS: Btraced </h2>
+	<br>
+	
+	<ol>
+	<li>
+		<%=link_to "Download", "https://itunes.apple.com/app/btraced/id498853172?mt=8", :target => "_blank" %>
+	and install the <b> Btraced Track &amp; Trace</b> application from the iTune App Store onto your iOS device. This will cost you $1.99.</li>
+	<li> Open the Btraced application on your device and click <b>Settings</b> on the bottom right.
+		<br><%= image_tag("btraced/screen1.png", :size => "209x50") %>
+	</li>
+	<li>Click <b>Upload Server</b>.
+		<br><%= image_tag("btraced/screen2.png", :size => "209x50") %>
+	</li>
+	<li>Click <b>Server</b>.
+		<br><%= image_tag("btraced/screen3.png", :size => "209x50") %>
+	</li>
+	<li>Click <b>Customized</b>.
+		<br><%= image_tag("btraced/screen4.png", :size => "209x50") %>
+	</li>
+	<li>In the text box, enter the following unique URL and press <b>Save</b>:
+	<pre>http://myairmyhealth.medicalaffairs.philips.com/gps/<%= @token %></pre>
+		<%= image_tag("btraced/screen5.png", :size => "209x50") %>
+	</li>
+	<li>Under <b>GPS Settings</b> adjust the <b>Time Update Interval</b>. If you are not moving very 
+	rapidly, once every <b>5-20 minutes</b> may be sufficient; if you are on the go, every <b>1-2 minutes</b> may be appropriate.
+		<br><%= image_tag("btraced/screen6.png", :size => "209x50") %>
+		<%= image_tag("btraced/screen7.png", :size => "209x50") %>
+	</li>
+	<li>Finally, to transmit your location, click <b>Trips</b> on the bottom left and add a <b>New Trip</b>.
+		Turn <b>Tracking On</b> when you want to send data to the server.
+		<br><%= image_tag("btraced/screen1.png", :size => "209x50") %>
+		<%= image_tag("btraced/screen8.png", :size => "209x50") %>
+	</li>
+	<br>
+	<br>
+ 	<%= link_to "Authorize", btraced_callback_path( { :token => @token} ), :method => :post, :class => :button %>
+ 
+	<%= link_to "Back", :back %>
+ 

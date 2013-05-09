@@ -1,0 +1,9 @@
+
+
+<div>
+    <%= form_for @device.becomes(DeviceNanotracer), 
+          :url => { :controller => "nanotracer", :action => "upload"} do |f| %>
+     <%= f.file_field :nanotracer_data %>
+     <%= f.submit "Upload", :class => :button%>
+  <% end %>
+</div>

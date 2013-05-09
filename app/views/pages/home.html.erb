@@ -1,0 +1,21 @@
+
+    <div class="row-fluid">
+    <div class="span6">
+    	<center>
+	<%= link_to image_tag("mamh_large.jpg", :size=>'500x350', :alt => "My Air My Health"), "http://challenge.gov/HHS/372-my-air-my-health-challenge" %>
+</center>
+<br />
+The “My Air, My Health Challenge” is a multidisciplinary call from the US Department of Health and Human Services and the US Environmental Pollution Agency to innovators and software developers to enable near-real-time, location-specific monitoring and reporting of air pollutants and potentially related physiological parameters, using a personal/portable integrated system to assess connections between the two. The system should link air-pollutant concentrations with physiological data, provide geocoded and time-stamped files in an easy-to-use format, and transmit this data via existing networks to a central data repository. 
+	</div>
+    <div class="span6">
+    	<br>
+    	<%= render 'shared/youtube_video_embed' %> 
+    </div>
+    </div>
+
+<div align="center">
+	<% unless user_signed_in? -%>
+	<%= link_to "Sign up now!", new_user_registration_path, :class => "button" %>
+	<%= link_to 'Sign in', new_user_session_path, :id=>"signinbutton", :class => "button" %></p>
+<% end -%>
+</div>
